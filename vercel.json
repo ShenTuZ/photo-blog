@@ -22,6 +22,10 @@
       "dest": "images/$1"
     },
     {
+      "src": "/images-optimized/(.*)",
+      "dest": "images-optimized/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "index.html"
     }
