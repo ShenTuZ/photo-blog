@@ -27,6 +27,9 @@
 # 安装依赖
 npm install
 
+# 压缩图片
+npm run optimize:images
+
 # 启动开发服务器
 npm run dev
 
@@ -69,6 +72,10 @@ npm run preview
   feeling: '拍摄感受'
 }
 ```
+
+## 🖼️ 图片压缩
+
+原图放在 `public/images/`，运行 `npm run optimize:images` 会在 `public/images-optimized/` 生成 WebP 图片。页面默认引用优化后的图片，原图可继续保留作为备份。
 
 ## 📄 许可证
 

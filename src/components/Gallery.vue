@@ -20,21 +20,21 @@ const featuredPhotographers = [
     id: 1,
     name: '富士山',
     title: '花海富士',
-    image: '/images/fushishan.jpg',
+    image: '/images-optimized/fushishan.webp',
     description: '樱花季的富士山美景'
   },
   {
     id: 2,
     name: '下关',
     title: '悬崖海岸',
-    image: '/images/xiaguer.jpg',
+    image: '/images-optimized/xiaguer.webp',
     description: '雾气缭绕的海岸悬崖'
   },
   {
     id: 3,
     name: '峡谷',
     title: '碧海青山',
-    image: '/images/xiagu.jpg',
+    image: '/images-optimized/xiagu.webp',
     description: '山海之间的壮丽景色'
   }
 ]
@@ -66,6 +66,7 @@ const featuredPhotographers = [
             <img 
               :src="item.image" 
               :alt="item.title" 
+              loading="lazy"
               class="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-110"
             />
             
@@ -104,6 +105,7 @@ const featuredPhotographers = [
               <img 
                 :src="photographer.image" 
                 :alt="photographer.title" 
+                loading="lazy"
                 class="w-full h-48 object-cover"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-neo-ink/80 to-transparent"></div>
