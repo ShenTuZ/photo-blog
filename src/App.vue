@@ -4,7 +4,7 @@ import Hero from './components/Hero.vue'
 import Gallery from './components/Gallery.vue'
 import BlogPage from './components/BlogPage.vue'
 import Footer from './components/Footer.vue'
-import { useRouter } from './store/portfolioStore.js'
+import { useRouter } from './store/router.js'
 
 const { currentPage } = useRouter()
 </script>

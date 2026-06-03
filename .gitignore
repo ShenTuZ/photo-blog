@@ -23,8 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# 暂时不用的点赞功能
-api/
-docs/
-scripts/likes-api.test.mjs
-scripts/ui-regressions.test.mjs
+# 原始照片（仅保留优化后的 WebP）
+public/images/*.jpg
+public/images/*.png

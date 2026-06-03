@@ -1,28 +1,8 @@
 <script setup>
 import { Camera, Heart, ArrowUp } from 'lucide-vue-next'
-import { useRouter } from '../store/portfolioStore.js'
+import { useNavigation } from '../composables/useNavigation.js'
 
-const { navigateTo } = useRouter()
-
-const quickLinks = [
-  { name: '首页', page: 'home' },
-  { name: '作品', page: 'home' },
-  { name: '故事', page: 'blog' }
-]
-
-const handleNav = (link) => {
-  if (link.page === 'blog') {
-    navigateTo('blog')
-  } else {
-    navigateTo('home')
-    if (link.name === '作品') {
-      setTimeout(() => {
-        const element = document.querySelector('#portfolio')
-        if (element) element.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-    }
-  }
-}
+const { navLinks, handleNav } = useNavigation()
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -36,7 +16,7 @@ const scrollToTop = () => {
     <div class="container mx-auto px-4 relative z-10">
       <div class="grid md:grid-cols-3 gap-12 mb-12">
         <div>
-          <a href="#home" class="flex items-center gap-2 mb-6">
+          <a href="#" @click.prevent="handleNav({ page: 'home' })" class="flex items-center gap-2 mb-6">
             <div class="bg-neo-accent border-4 border-neo-ink p-2 shadow-neo-sm">
               <Camera class="w-6 h-6 text-neo-white" />
             </div>
@@ -61,7 +41,7 @@ const scrollToTop = () => {
         <div>
           <h4 class="font-black text-xl uppercase mb-6">快速导航</h4>
           <ul class="space-y-3">
-            <li v-for="link in quickLinks" :key="link.name">
+            <li v-for="link in navLinks" :key="link.name">
               <button
                 @click="handleNav(link)"
                 class="font-bold text-sm uppercase tracking-wider hover:text-neo-accent transition-colors text-left"

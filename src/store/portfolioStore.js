@@ -1,18 +1,5 @@
 import { ref } from 'vue'
 
-// 页面路由状态
-const currentPage = ref('home')
-
-export function useRouter() {
-  return {
-    currentPage,
-    navigateTo: (page) => {
-      currentPage.value = page
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-  }
-}
-
 const portfolioItems = ref([
   {
     id: 1,

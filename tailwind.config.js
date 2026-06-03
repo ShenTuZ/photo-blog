@@ -32,10 +32,6 @@ export default {
         'neo-dark-sm': '4px 4px 0px 0px #BDBDBD',
         'neo-dark-md': '8px 8px 0px 0px #BDBDBD',
       },
-      textShadow: {
-        'neo': '4px 4px 0px #000',
-        'neo-lg': '6px 6px 0px #000',
-      },
       animation: {
         'spin-slow': 'spin-slow 10s linear infinite',
       },

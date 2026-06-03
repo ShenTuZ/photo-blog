@@ -65,6 +65,8 @@ const formatDate = (dateStr) => {
             <img
               :src="post.cover"
               :alt="post.title"
+              width="1600"
+              height="1200"
               loading="lazy"
               class="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
             />
@@ -115,6 +117,8 @@ const formatDate = (dateStr) => {
           <img
             :src="selectedPost.cover"
             :alt="selectedPost.title"
+            width="1600"
+            height="1200"
             class="w-full h-64 md:h-96 object-cover"
           />
 

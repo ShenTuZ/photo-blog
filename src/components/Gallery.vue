@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ArrowUpRight, ExternalLink } from 'lucide-vue-next'
 import { usePortfolioStore } from '../store/portfolioStore.js'
 
@@ -14,6 +14,15 @@ const openLightbox = (item) => {
 const closeLightbox = () => {
   selectedItem.value = null
 }
+
+const handleKeydown = (e) => {
+  if (e.key === 'Escape' && selectedItem.value) {
+    closeLightbox()
+  }
+}
+
+onMounted(() => document.addEventListener('keydown', handleKeydown))
+onUnmounted(() => document.removeEventListener('keydown', handleKeydown))
 
 const featuredPhotographers = [
   {
@@ -62,6 +71,8 @@ const featuredPhotographers = [
             <img
               :src="item.image"
               :alt="item.title"
+              width="1600"
+              height="1200"
               loading="lazy"
               class="w-full h-72 object-cover transition-transform duration-300 group-hover:scale-110"
             />
@@ -94,9 +105,11 @@ const featuredPhotographers = [
             class="bg-neo-white border-4 border-neo-ink shadow-neo-lg overflow-hidden hover:-translate-y-2 hover:shadow-neo-xl transition-all duration-200"
           >
             <div class="relative overflow-hidden">
-              <img 
-                :src="photographer.image" 
-                :alt="photographer.title" 
+              <img
+                :src="photographer.image"
+                :alt="photographer.title"
+                width="1600"
+                height="1200"
                 loading="lazy"
                 class="w-full h-48 object-cover"
               />
@@ -135,9 +148,11 @@ const featuredPhotographers = [
             <span class="font-black text-2xl text-neo-white">&times;</span>
           </button>
           
-          <img 
-            :src="selectedItem.image" 
-            :alt="selectedItem.title" 
+          <img
+            :src="selectedItem.image"
+            :alt="selectedItem.title"
+            width="1600"
+            height="1200"
             class="w-full h-auto max-h-[60vh] object-contain"
           />
           

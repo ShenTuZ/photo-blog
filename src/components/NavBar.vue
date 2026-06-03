@@ -1,18 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { Menu, X, Camera, Sun, Moon } from 'lucide-vue-next'
-import { useRouter } from '../store/portfolioStore.js'
 import { useThemeStore } from '../store/themeStore.js'
+import { useNavigation } from '../composables/useNavigation.js'
 
 const isMenuOpen = ref(false)
-const { currentPage, navigateTo } = useRouter()
 const { isDark, toggleTheme } = useThemeStore()
-
-const navLinks = [
-  { name: '首页', page: 'home' },
-  { name: '照片', page: 'home' },
-  { name: '故事', page: 'blog' }
-]
+const { currentPage, navLinks, handleNav: nav } = useNavigation()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -20,17 +14,7 @@ const toggleMenu = () => {
 
 const handleNav = (link) => {
   isMenuOpen.value = false
-  if (link.page === 'blog') {
-    navigateTo('blog')
-  } else {
-    navigateTo('home')
-    setTimeout(() => {
-      if (link.name === '照片') {
-        const element = document.querySelector('#portfolio')
-        if (element) element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }, 100)
-  }
+  nav(link)
 }
 </script>
 

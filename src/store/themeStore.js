@@ -2,9 +2,11 @@ import { ref, watch } from 'vue'
 
 const isDark = ref(false)
 
-// 从 localStorage 读取保存的主题
+// 优先读取 localStorage，其次检测系统偏好
 const savedTheme = localStorage.getItem('theme')
 if (savedTheme === 'dark') {
+  isDark.value = true
+} else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   isDark.value = true
 }
 
