@@ -8,6 +8,8 @@
 
 [在线预览](https://photoblog-shentuzs-projects.vercel.app/) · [报告问题](https://github.com/ShenTuZi/person/issues)
 
+<img src="./界面.png" alt="界面预览" width="100%" />
+
 </div>
 
 ---
