@@ -1,23 +1,35 @@
 <script setup>
 import { ref } from 'vue'
-import { Menu, X, Camera } from 'lucide-vue-next'
+import { Menu, X, Camera, Sun, Moon } from 'lucide-vue-next'
+import { useRouter } from '../store/portfolioStore.js'
+import { useThemeStore } from '../store/themeStore.js'
 
 const isMenuOpen = ref(false)
+const { currentPage, navigateTo } = useRouter()
+const { isDark, toggleTheme } = useThemeStore()
 
 const navLinks = [
-  { name: '首页', href: '#home' },
-  { name: '照片', href: '#portfolio' }
+  { name: '首页', page: 'home' },
+  { name: '照片', page: 'home' },
+  { name: '故事', page: 'blog' }
 ]
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 
-const scrollToSection = (href) => {
+const handleNav = (link) => {
   isMenuOpen.value = false
-  const element = document.querySelector(href)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
+  if (link.page === 'blog') {
+    navigateTo('blog')
+  } else {
+    navigateTo('home')
+    setTimeout(() => {
+      if (link.name === '照片') {
+        const element = document.querySelector('#portfolio')
+        if (element) element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
   }
 }
 </script>
@@ -34,24 +46,49 @@ const scrollToSection = (href) => {
         </a>
 
         <div class="hidden md:flex items-center gap-6">
-          <a 
-            v-for="link in navLinks" 
+          <button
+            v-for="link in navLinks"
             :key="link.name"
-            @click.prevent="scrollToSection(link.href)"
-            class="font-bold text-sm uppercase tracking-wider hover:bg-neo-accent hover:text-neo-white hover:px-3 hover:py-1 hover:border-4 hover:border-neo-ink hover:shadow-neo-sm cursor-pointer transition-all duration-100"
+            @click="handleNav(link)"
+            :class="[
+              'font-bold text-sm uppercase tracking-wider hover:bg-neo-accent hover:text-neo-white hover:px-3 hover:py-1 hover:border-4 hover:border-neo-ink hover:shadow-neo-sm cursor-pointer transition-all duration-100',
+              currentPage === link.page && link.name === '故事' ? 'bg-neo-accent text-neo-white px-3 py-1 border-4 border-neo-ink shadow-neo-sm' : ''
+            ]"
           >
             {{ link.name }}
-          </a>
+          </button>
+
+          <!-- 深色模式切换按钮 -->
+          <button
+            @click="toggleTheme"
+            class="bg-neo-secondary border-4 border-neo-ink p-2 shadow-neo-sm hover:bg-neo-accent hover:text-neo-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100"
+            :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
+          >
+            <Sun v-if="isDark" class="w-5 h-5" />
+            <Moon v-else class="w-5 h-5" />
+          </button>
         </div>
 
-        <button 
-          @click="toggleMenu"
-          class="md:hidden bg-neo-secondary border-4 border-neo-ink p-3 shadow-neo-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100"
-          aria-label="菜单"
-        >
-          <Menu v-if="!isMenuOpen" class="w-6 h-6" />
-          <X v-else class="w-6 h-6" />
-        </button>
+        <div class="flex items-center gap-3 md:hidden">
+          <!-- 移动端深色模式切换按钮 -->
+          <button
+            @click="toggleTheme"
+            class="bg-neo-secondary border-4 border-neo-ink p-3 shadow-neo-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100"
+            :aria-label="isDark ? '切换到浅色模式' : '切换到深色模式'"
+          >
+            <Sun v-if="isDark" class="w-5 h-5" />
+            <Moon v-else class="w-5 h-5" />
+          </button>
+
+          <button
+            @click="toggleMenu"
+            class="bg-neo-secondary border-4 border-neo-ink p-3 shadow-neo-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-100"
+            aria-label="菜单"
+          >
+            <Menu v-if="!isMenuOpen" class="w-6 h-6" />
+            <X v-else class="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
       <div 
@@ -59,11 +96,14 @@ const scrollToSection = (href) => {
         class="md:hidden bg-neo-bg border-t-4 border-neo-ink py-4"
       >
         <div class="flex flex-col gap-2">
-          <button 
-            v-for="link in navLinks" 
+          <button
+            v-for="link in navLinks"
             :key="link.name"
-            @click="scrollToSection(link.href)"
-            class="font-bold text-sm uppercase tracking-wider text-left px-4 py-3 border-4 border-neo-ink bg-neo-white shadow-neo-sm hover:bg-neo-accent hover:text-neo-white transition-all duration-100"
+            @click="handleNav(link)"
+            :class="[
+              'font-bold text-sm uppercase tracking-wider text-left px-4 py-3 border-4 border-neo-ink shadow-neo-sm hover:bg-neo-accent hover:text-neo-white transition-all duration-100',
+              currentPage === link.page && link.name === '故事' ? 'bg-neo-accent text-neo-white' : 'bg-neo-white'
+            ]"
           >
             {{ link.name }}
           </button>

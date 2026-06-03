@@ -1,18 +1,26 @@
 <script setup>
-import { Camera, Instagram, Twitter, Facebook, ArrowUp } from 'lucide-vue-next'
+import { Camera, Heart, ArrowUp } from 'lucide-vue-next'
+import { useRouter } from '../store/portfolioStore.js'
 
-const socialLinks = [
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Facebook, href: '#', label: 'Facebook' }
+const { navigateTo } = useRouter()
+
+const quickLinks = [
+  { name: '首页', page: 'home' },
+  { name: '作品', page: 'home' },
+  { name: '故事', page: 'blog' }
 ]
 
-const quickLinks = ['首页', '作品']
-
-const scrollToSection = (link) => {
-  const element = document.querySelector(`#${link}`)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
+const handleNav = (link) => {
+  if (link.page === 'blog') {
+    navigateTo('blog')
+  } else {
+    navigateTo('home')
+    if (link.name === '作品') {
+      setTimeout(() => {
+        const element = document.querySelector('#portfolio')
+        if (element) element.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
   }
 }
 
@@ -38,28 +46,27 @@ const scrollToTop = () => {
             用镜头记录生活，分享那些让我心动的瞬间。
             摄影是一种态度，也是一种生活方式。
           </p>
-          <div class="flex gap-3">
-            <a 
-              v-for="social in socialLinks" 
-              :key="social.label"
-              :href="social.href"
-              :aria-label="social.label"
-              class="bg-neo-white text-neo-ink border-4 border-neo-ink w-12 h-12 flex items-center justify-center shadow-neo-sm hover:bg-neo-accent hover:text-neo-white transition-all duration-100"
-            >
-              <component :is="social.icon" class="w-5 h-5" />
-            </a>
+          <div class="bg-neo-secondary border-4 border-neo-ink p-4 shadow-neo-sm">
+            <div class="flex items-center gap-2 mb-3">
+              <Heart class="w-5 h-5 text-neo-accent fill-neo-accent" />
+              <span class="font-black text-sm uppercase">关于我</span>
+            </div>
+            <p class="font-bold text-sm leading-relaxed">
+              一个热爱摄影的普通人，喜欢用镜头捕捉生活中的美好瞬间。
+              相信每一张照片都有它独特的故事。
+            </p>
           </div>
         </div>
 
         <div>
           <h4 class="font-black text-xl uppercase mb-6">快速导航</h4>
           <ul class="space-y-3">
-            <li v-for="link in quickLinks" :key="link">
-              <button 
-                @click="scrollToSection(link)"
+            <li v-for="link in quickLinks" :key="link.name">
+              <button
+                @click="handleNav(link)"
                 class="font-bold text-sm uppercase tracking-wider hover:text-neo-accent transition-colors text-left"
               >
-                {{ link }}
+                {{ link.name }}
               </button>
             </li>
           </ul>

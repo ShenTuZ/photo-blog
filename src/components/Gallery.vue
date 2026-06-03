@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { ArrowUpRight, Star, ExternalLink } from 'lucide-vue-next'
+import { ArrowUpRight, ExternalLink } from 'lucide-vue-next'
 import { usePortfolioStore } from '../store/portfolioStore.js'
 
 const { portfolioItems } = usePortfolioStore()
@@ -51,36 +51,28 @@ const featuredPhotographers = [
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        <div 
-          v-for="(item, index) in portfolioItems" 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div
+          v-for="item in portfolioItems"
           :key="item.id"
-          :class="[
-            'neo-card cursor-pointer overflow-hidden group',
-            item.featured ? 'lg:col-span-2' : ''
-          ]"
-          :style="{ transform: `rotate(${index % 2 === 0 ? 1 : -1}deg)` }"
+          class="neo-card cursor-pointer overflow-hidden group"
           @click="openLightbox(item)"
         >
           <div class="relative overflow-hidden">
-            <img 
-              :src="item.image" 
-              :alt="item.title" 
+            <img
+              :src="item.image"
+              :alt="item.title"
               loading="lazy"
-              class="w-full h-64 md:h-80 object-cover transition-transform duration-300 group-hover:scale-110"
+              class="w-full h-72 object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            
-            <div class="absolute inset-0 bg-neo-ink bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200 flex items-center justify-center">
+
+            <div class="card-hover-overlay absolute inset-0 bg-neo-ink bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200 flex items-center justify-center">
               <div class="bg-neo-accent border-4 border-neo-white p-4 shadow-neo-md opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-4 group-hover:translate-y-0">
                 <ArrowUpRight class="w-8 h-8 text-neo-white" />
               </div>
             </div>
-
-            <div v-if="item.featured" class="absolute top-4 left-4 bg-neo-secondary border-4 border-neo-ink px-3 py-1 shadow-neo-sm rotate-3">
-              <Star class="w-5 h-5 fill-neo-ink" />
-            </div>
           </div>
-          
+
           <div class="p-4 border-t-4 border-neo-ink">
             <h3 class="font-black text-lg uppercase tracking-tight">{{ item.title }}</h3>
           </div>
@@ -130,11 +122,11 @@ const featuredPhotographers = [
 
     <Teleport to="body">
       <div 
-        v-if="selectedItem" 
-        class="fixed inset-0 bg-neo-ink bg-opacity-90 z-50 flex items-center justify-center p-4"
+        v-if="selectedItem"
+        class="lightbox-overlay fixed inset-0 bg-neo-ink bg-opacity-90 z-50 flex items-center justify-center p-4"
         @click="closeLightbox"
       >
-        <div class="relative max-w-4xl w-full bg-neo-white border-4 border-neo-ink shadow-neo-xl" @click.stop>
+        <div class="lightbox-content relative max-w-4xl w-full bg-neo-white border-4 border-neo-ink shadow-neo-xl" @click.stop>
           <button 
             @click="closeLightbox"
             class="absolute -top-4 -right-4 bg-neo-accent border-4 border-neo-ink w-12 h-12 flex items-center justify-center shadow-neo-sm hover:bg-red-600 transition-colors"

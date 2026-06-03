@@ -1,12 +1,24 @@
 import { ref } from 'vue'
 
+// 页面路由状态
+const currentPage = ref('home')
+
+export function useRouter() {
+  return {
+    currentPage,
+    navigateTo: (page) => {
+      currentPage.value = page
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+}
+
 const portfolioItems = ref([
   {
     id: 1,
     title: '校园',
     year: '2025',
     image: '/images-optimized/campus.webp',
-    featured: true,
     description: '校园的午后，阳光洒在操场上，一切都那么宁静美好。',
     feeling: '这张照片让我想起了大学时光，那些无忧无虑的日子。'
   },
@@ -15,7 +27,6 @@ const portfolioItems = ref([
     title: '洱海',
     year: '2025',
     image: '/images-optimized/erhai.webp',
-    featured: false,
     description: '洱海的日出，湖面波光粼粼，远处的山峦若隐若现。',
     feeling: '那一刻，我感受到了大自然的宁静与力量。'
   },
@@ -24,9 +35,16 @@ const portfolioItems = ref([
     title: '洱海小屋',
     year: '2025',
     image: '/images-optimized/erhai_house.webp',
-    featured: true,
     description: '面朝洱海，春暖花开。这间小屋见证了生活的另一种可能。',
     feeling: '多么希望时间能慢下来，就这样静静地坐着看海。'
+  },
+  {
+    id: 4,
+    title: '生活碎片',
+    year: '2024',
+    image: '/images-optimized/life.webp',
+    description: '生活中那些不经意的美好瞬间，值得被记录。',
+    feeling: '平凡的日子里，藏着最真实的幸福。'
   }
 ])
 
