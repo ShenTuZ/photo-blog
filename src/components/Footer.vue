@@ -1,6 +1,8 @@
 <script setup>
 import { Camera, Heart, ArrowUp } from 'lucide-vue-next'
 import { useNavigation } from '../composables/useNavigation.js'
+import QQIcon from './icons/QQIcon.vue'
+import WeChatIcon from './icons/WeChatIcon.vue'
 
 const { navLinks, handleNav } = useNavigation()
 
@@ -57,16 +59,16 @@ const scrollToTop = () => {
           <ul class="space-y-4">
             <li class="flex items-center gap-3">
               <div class="bg-neo-accent border-4 border-neo-white w-10 h-10 flex items-center justify-center">
-                <span class="font-black text-sm">QQ</span>
+                <QQIcon class="w-5 h-5 text-neo-white" />
               </div>
               <div>
-                <p class="font-bold text-sm uppercase text-neo-muted">邮箱</p>
+                <p class="font-bold text-sm uppercase text-neo-muted">QQ邮箱</p>
                 <p class="font-bold">312578624@qq.com</p>
               </div>
             </li>
             <li class="flex items-center gap-3">
               <div class="bg-neo-accent border-4 border-neo-white w-10 h-10 flex items-center justify-center">
-                <span class="font-black text-xs">WX</span>
+                <WeChatIcon class="w-5 h-5 text-neo-white" />
               </div>
               <div>
                 <p class="font-bold text-sm uppercase text-neo-muted">微信</p>
