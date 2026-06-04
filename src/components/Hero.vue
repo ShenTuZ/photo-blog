@@ -48,7 +48,7 @@ const scrollToPortfolio = () => {
           
           <div class="hero-photo-frame relative bg-neo-white border-8 border-neo-ink shadow-neo-xl p-4 rotate-2">
             <img
-              src="/images-optimized/photographer.webp"
+              src="/images-optimized/mine/photographer.webp"
               alt="摄影师"
               width="1600"
               height="1066"

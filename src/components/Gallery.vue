@@ -29,21 +29,21 @@ const featuredPhotographers = [
     id: 1,
     name: '富士山',
     title: '花海富士',
-    image: '/images-optimized/fushishan.webp',
+    image: '/images-optimized/others/fushishan.webp',
     description: '樱花季的富士山美景'
   },
   {
     id: 2,
     name: '下关',
     title: '悬崖海岸',
-    image: '/images-optimized/xiaguer.webp',
+    image: '/images-optimized/others/xiaguer.webp',
     description: '雾气缭绕的海岸悬崖'
   },
   {
     id: 3,
     name: '峡谷',
     title: '碧海青山',
-    image: '/images-optimized/xiagu.webp',
+    image: '/images-optimized/others/xiagu.webp',
     description: '山海之间的壮丽景色'
   }
 ]

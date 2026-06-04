@@ -6,22 +6,20 @@ export function useNavigation() {
   const navLinks = [
     { name: '首页', page: 'home' },
     { name: '照片', page: 'home', scrollTo: '#portfolio' },
-    { name: '故事', page: 'blog' }
+    { name: '故事', page: 'blog' },
+    { name: '地图', page: 'map' },
+    { name: '关于', page: 'about' }
   ]
 
   const handleNav = (link) => {
-    if (link.page === 'blog') {
-      navigateTo('blog')
-    } else {
-      navigateTo('home')
-      if (link.scrollTo) {
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            const el = document.querySelector(link.scrollTo)
-            if (el) el.scrollIntoView({ behavior: 'smooth' })
-          }, 50)
-        })
-      }
+    navigateTo(link.page)
+    if (link.scrollTo) {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          const el = document.querySelector(link.scrollTo)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
+      })
     }
   }
 

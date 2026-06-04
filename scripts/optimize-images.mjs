@@ -19,22 +19,32 @@ export function getOutputPath(inputDir, outputDir, fileName) {
 export async function optimizeImages(inputDir = 'public/images', outputDir = 'public/images-optimized') {
   await fs.mkdir(outputDir, { recursive: true })
 
-  const files = await fs.readdir(inputDir)
-  const imageFiles = files.filter((file) => supportedExtensions.has(path.extname(file).toLowerCase()))
+  const entries = await fs.readdir(inputDir, { withFileTypes: true })
+  let count = 0
 
-  for (const file of imageFiles) {
-    const inputPath = path.join(inputDir, file)
-    const outputPath = getOutputPath(inputDir, outputDir, file)
+  for (const entry of entries) {
+    const inputPath = path.join(inputDir, entry.name)
+    const outputPath = path.join(outputDir, entry.name)
+
+    if (entry.isDirectory()) {
+      count += await optimizeImages(inputPath, outputPath)
+      continue
+    }
+
+    if (!supportedExtensions.has(path.extname(entry.name).toLowerCase())) continue
+
+    const outputWebp = path.join(outputDir, `${path.parse(entry.name).name}.webp`)
 
     await sharp(inputPath)
       .resize({ width: imageOptions.width, withoutEnlargement: true })
       .webp({ quality: imageOptions.quality })
-      .toFile(outputPath)
+      .toFile(outputWebp)
 
-    console.log(`optimized ${file} -> ${path.basename(outputPath)}`)
+    console.log(`optimized ${entry.name} -> ${path.basename(outputWebp)}`)
+    count++
   }
 
-  return imageFiles.length
+  return count
 }
 
 const isMainModule = process.argv[1] === fileURLToPath(import.meta.url)

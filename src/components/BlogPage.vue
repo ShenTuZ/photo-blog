@@ -41,7 +41,7 @@ const formatDate = (dateStr) => {
         <button
           v-for="cat in categories"
           :key="cat"
-          @click="activeCategory = cat"
+          @click="activeCategory = cat; closePost()"
           :class="[
             'px-4 py-2 font-bold text-sm uppercase border-4 border-neo-ink transition-all duration-100',
             activeCategory === cat

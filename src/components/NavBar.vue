@@ -36,7 +36,7 @@ const handleNav = (link) => {
             @click="handleNav(link)"
             :class="[
               'font-bold text-sm uppercase tracking-wider hover:bg-neo-accent hover:text-neo-white hover:px-3 hover:py-1 hover:border-4 hover:border-neo-ink hover:shadow-neo-sm cursor-pointer transition-all duration-100',
-              currentPage === link.page && link.name === '故事' ? 'bg-neo-accent text-neo-white px-3 py-1 border-4 border-neo-ink shadow-neo-sm' : ''
+              currentPage === link.page && link.name !== '首页' && link.name !== '照片' ? 'bg-neo-accent text-neo-white px-3 py-1 border-4 border-neo-ink shadow-neo-sm' : ''
             ]"
           >
             {{ link.name }}
@@ -86,7 +86,7 @@ const handleNav = (link) => {
             @click="handleNav(link)"
             :class="[
               'font-bold text-sm uppercase tracking-wider text-left px-4 py-3 border-4 border-neo-ink shadow-neo-sm hover:bg-neo-accent hover:text-neo-white transition-all duration-100',
-              currentPage === link.page && link.name === '故事' ? 'bg-neo-accent text-neo-white' : 'bg-neo-white'
+              currentPage === link.page && link.name !== '首页' && link.name !== '照片' ? 'bg-neo-accent text-neo-white' : 'bg-neo-white'
             ]"
           >
             {{ link.name }}
