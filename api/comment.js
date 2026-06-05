@@ -1,9 +1,8 @@
-import { neon } from '@neondatabase/serverless'
+const { neon } = require('@neondatabase/serverless')
 
 const sql = neon(process.env.DATABASE_URL)
 
-export default async function handler(req, res) {
-  // CORS
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -13,7 +12,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // GET: 获取评论列表
     if (req.method === 'GET') {
       const { path } = req.query
       if (!path) return res.status(400).json({ error: 'path is required' })
@@ -29,7 +27,6 @@ export default async function handler(req, res) {
       return res.status(200).json({ comments })
     }
 
-    // POST: 提交评论
     if (req.method === 'POST') {
       const { path, nick, content } = req.body
 
@@ -37,7 +34,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'path, nick and content are required' })
       }
 
-      // 简单过滤
       if (nick.length > 50) {
         return res.status(400).json({ error: '昵称不能超过50个字符' })
       }
