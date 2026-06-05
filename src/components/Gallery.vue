@@ -123,10 +123,10 @@ const featuredPhotographers = [
             <div class="p-4">
               <h4 class="font-black text-lg uppercase">{{ photographer.title }}</h4>
               <p class="font-bold text-sm text-neo-muted mt-2">{{ photographer.description }}</p>
-              <button class="mt-4 flex items-center gap-2 font-bold text-sm text-neo-accent hover:underline">
+              <a :href="photographer.link || 'https://space.bilibili.com/3816626/dynamic'" target="_blank" rel="noopener noreferrer" class="mt-4 flex items-center gap-2 font-bold text-sm text-neo-accent hover:underline">
                 <span>查看更多</span>
                 <ExternalLink class="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { MapPin } from 'lucide-vue-next'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import { usePortfolioStore } from '../store/portfolioStore.js'
 import { useBlogStore } from '../store/blogStore.js'
 import { useRouter } from '../store/router.js'

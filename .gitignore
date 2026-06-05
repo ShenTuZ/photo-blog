@@ -24,5 +24,5 @@ dist-ssr
 *.sw?
 
 # 原始照片（仅保留优化后的 WebP）
-public/images/*.jpg
-public/images/*.png
+public/images/**/*.jpg
+public/images/**/*.png

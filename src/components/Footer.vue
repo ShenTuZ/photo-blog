@@ -12,7 +12,7 @@ const scrollToTop = () => {
 </script>
 
 <template>
-  <footer class="bg-neo-ink text-neo-white py-16 relative overflow-hidden">
+  <footer class="footer-bg text-neo-white py-16 relative overflow-hidden">
     <div class="absolute inset-0 grid-bg opacity-10"></div>
     
     <div class="container mx-auto px-4 relative z-10">
@@ -31,9 +31,9 @@ const scrollToTop = () => {
           <div class="bg-neo-secondary border-4 border-neo-ink p-4 shadow-neo-sm">
             <div class="flex items-center gap-2 mb-3">
               <Heart class="w-5 h-5 text-neo-accent fill-neo-accent" />
-              <span class="font-black text-sm uppercase">关于我</span>
+              <span class="font-black text-sm uppercase text-neo-ink">关于我</span>
             </div>
-            <p class="font-bold text-sm leading-relaxed">
+            <p class="font-bold text-sm leading-relaxed text-neo-ink">
               一个热爱摄影的普通人，喜欢用镜头捕捉生活中的美好瞬间。
               相信每一张照片都有它独特的故事。
             </p>
