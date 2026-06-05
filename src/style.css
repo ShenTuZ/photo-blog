@@ -166,6 +166,31 @@
     background-color: #FF6B6B;
     color: #fff;
   }
+
+  /* 深色模式评论区 */
+  html.dark .comment-form {
+    background-color: #2E2E2E;
+    border-color: #BDBDBD;
+  }
+
+  html.dark .comment-input {
+    background-color: #1A1A1A;
+    border-color: #BDBDBD;
+    color: #E5E5E5;
+  }
+
+  html.dark .comment-input:focus {
+    background-color: #242424;
+  }
+
+  html.dark .comment-input::placeholder {
+    color: #666;
+  }
+
+  html.dark .comment-item {
+    background-color: #2E2E2E;
+    border-color: #BDBDBD;
+  }
 }
 
 @layer components {

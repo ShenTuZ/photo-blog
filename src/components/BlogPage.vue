@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import { Calendar, Tag, ArrowLeft, BookOpen } from 'lucide-vue-next'
 import { useBlogStore } from '../store/blogStore.js'
+import LikeButton from './LikeButton.vue'
+import CommentSection from './CommentSection.vue'
 
 const { blogPosts, selectedPost, openPost, closePost } = useBlogStore()
 
@@ -152,6 +154,16 @@ const formatDate = (dateStr) => {
             </div>
           </div>
         </article>
+
+        <!-- 点赞按钮 -->
+        <div class="mt-8 text-center">
+          <LikeButton :path="`/story/${selectedPost.id}`" />
+        </div>
+
+        <!-- 评论区 -->
+        <div class="mt-8">
+          <CommentSection :path="`/story/${selectedPost.id}`" />
+        </div>
       </div>
     </div>
   </section>
