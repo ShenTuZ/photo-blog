@@ -1,13 +1,6 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -15,23 +8,23 @@
     },
     {
       "src": "/assets/(.*)",
-      "dest": "assets/$1"
+      "dest": "/assets/$1"
     },
     {
       "src": "/favicon.ico",
-      "dest": "favicon.ico"
+      "dest": "/favicon.ico"
     },
     {
       "src": "/images/(.*)",
-      "dest": "images/$1"
+      "dest": "/images/$1"
     },
     {
       "src": "/images-optimized/(.*)",
-      "dest": "images-optimized/$1"
+      "dest": "/images-optimized/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "index.html"
+      "dest": "/index.html"
     }
   ]
 }
