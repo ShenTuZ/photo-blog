@@ -3,12 +3,10 @@ import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import { MapPin } from 'lucide-vue-next'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { usePortfolioStore } from '../store/portfolioStore.js'
 import { useBlogStore } from '../store/blogStore.js'
 import { useRouter } from '../store/router.js'
 import { useThemeStore } from '../store/themeStore.js'
 
-const { portfolioItems } = usePortfolioStore()
 const { blogPosts, openPost } = useBlogStore()
 const { navigateTo } = useRouter()
 const { isDark } = useThemeStore()
@@ -17,7 +15,7 @@ const mapContainer = ref(null)
 let map = null
 let tileLayer = null
 
-// 按地名去重，同一地点优先保留故事
+// 按地名去重
 const seen = new Set()
 const allLocations = []
 
@@ -34,21 +32,6 @@ blogPosts.value.forEach(post => {
       id: post.id,
       date: post.date,
       post
-    })
-  }
-})
-
-portfolioItems.value.forEach(item => {
-  if (!seen.has(item.locationName)) {
-    seen.add(item.locationName)
-    allLocations.push({
-      lat: item.location[0],
-      lng: item.location[1],
-      title: item.title,
-      locationName: item.locationName,
-      image: item.image,
-      type: 'photo',
-      id: item.id
     })
   }
 })
